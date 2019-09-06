@@ -1,20 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PagesRoutingModule } from './pages-routing.module';
+import { SharedModule } from '../shared/shared.module';
+import { ChartsModule } from 'ng2-charts';
+
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GraphicsComponent } from './graphics/graphics.component';
 import { ProgressComponent } from './progress/progress.component';
-import { SharedModule } from '../shared/shared.module';
+import { ChartComponent } from '../components/chart/chart.component';
 
 @NgModule({
   declarations: [
     PagesComponent,
     DashboardComponent,
     GraphicsComponent,
-    ProgressComponent
+    ProgressComponent,
+    ChartComponent
   ],
-  imports: [CommonModule, PagesRoutingModule, SharedModule],
+  imports: [CommonModule, PagesRoutingModule, SharedModule, ChartsModule],
   exports: [
     PagesComponent,
     DashboardComponent,
