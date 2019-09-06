@@ -9,6 +9,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { GraphicsComponent } from './graphics/graphics.component';
 import { ProgressComponent } from './progress/progress.component';
 import { ChartComponent } from '../components/chart/chart.component';
+import { SettingsComponent } from '../components/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ChartComponent } from '../components/chart/chart.component';
     DashboardComponent,
     GraphicsComponent,
     ProgressComponent,
-    ChartComponent
+    ChartComponent,
+    SettingsComponent
   ],
   imports: [CommonModule, PagesRoutingModule, SharedModule, ChartsModule],
   exports: [

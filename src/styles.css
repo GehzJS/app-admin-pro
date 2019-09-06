@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+#themecolors a {
+  cursor: pointer;
+  border: 2px white solid;
+  border-radius: 0.5rem;
+}
+
+#themecolors a:hover {
+  border: 2px gray solid !important;
+}
