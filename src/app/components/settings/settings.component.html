@@ -3,10 +3,12 @@
     <div class="card">
       <div class="card-body">
         <h3 class="card-title text-center">Temas</h3>
+
         <div class="r-panel-body">
           <ul id="themecolors" class="m-t-20">
             <li><b>Con el sidebar claro</b></li>
-            <li *ngFor="let color of colors | slice:0:6">
+
+            <li *ngFor="let color of colors | slice: 0:6">
               <a
                 [attr.dataTheme]="color"
                 class="selector"
@@ -17,8 +19,10 @@
                 }"
               ></a>
             </li>
+
             <li class="d-block m-t-30"><b>Con el sidebar oscuro</b></li>
-            <li *ngFor="let color of colors | slice:-6">
+
+            <li *ngFor="let color of colors | slice: -6">
               <a
                 [attr.dataTheme]="color"
                 class="selector"

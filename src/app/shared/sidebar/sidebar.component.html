@@ -26,12 +26,12 @@
                 >Account Setting</a
               >
             </li>
-            <li><a routerLink="/login">Logout</a></li>
+            <li><a (click)="userService.logout()" href="#">Logout</a></li>
           </ul>
         </li>
         <li class="nav-devider"></li>
         <li class="nav-small-cap">PERSONAL</li>
-        <li *ngFor="let section of sidebar.menu">
+        <li *ngFor="let section of sidebarService.menu">
           <a class="has-arrow waves-effect waves-dark" aria-expanded="false"
             ><i [class]="section.icon"></i
             ><span class="hide-menu"

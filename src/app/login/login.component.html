@@ -8,7 +8,12 @@
 >
   <div class="login-box card">
     <div class="card-body">
-      <form class="form-horizontal form-material" (ngSubmit)="login()">
+      <form
+        ngNativeValidate
+        [formGroup]="form"
+        (ngSubmit)="login()"
+        class="form-horizontal form-material"
+      >
         <a href="javascript:void(0)" class="text-center db"
           ><img src="../assets/images/logo-icon.png" alt="Home"/><br /><img
             src="../assets/images/logo-text.png"
@@ -16,12 +21,18 @@
         /></a>
         <div class="form-group m-t-40">
           <div class="col-xs-12">
-            <input class="form-control" type="text" placeholder="Usuario" />
+            <input
+              formControlName="email"
+              class="form-control"
+              type="text"
+              placeholder="Usuario"
+            />
           </div>
         </div>
         <div class="form-group">
           <div class="col-xs-12">
             <input
+              formControlName="password"
               class="form-control"
               type="password"
               placeholder="Contraseña"
@@ -32,6 +43,7 @@
           <div class="col-md-12">
             <div class="checkbox checkbox-primary pull-left p-t-0">
               <input
+                formControlName="remember"
                 id="checkbox-signup"
                 type="checkbox"
                 class="filled-in chk-col-light-blue"
@@ -59,29 +71,22 @@
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 text-center">
             <div class="social">
-              <a
-                href="javascript:void(0)"
-                class="btn  btn-facebook mr-2"
-                data-toggle="tooltip"
-                title="Iniciar sesión con Facebook"
-              >
-                <i aria-hidden="true" class="fa fa-facebook"></i>
-              </a>
-              <a
-                href="javascript:void(0)"
-                class="btn btn-googleplus"
+              <button
+                class="btn btn-googleplus text-white"
+                id="googleSignIn"
+                type="button"
                 data-toggle="tooltip"
                 title="Iniciar sesión con Google"
               >
                 <i aria-hidden="true" class="fa fa-google-plus"></i>
-              </a>
+              </button>
             </div>
           </div>
         </div>
         <div class="form-group m-b-0">
           <div class="col-sm-12 text-center">
             ¿No tiene una cuenta?
-            <a href="pages-register2.html" class="text-primary m-l-5"
+            <a routerLink="/register" class="text-primary m-l-5"
               ><b>Registrarse</b></a
             >
           </div>
