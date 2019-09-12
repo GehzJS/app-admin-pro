@@ -110,7 +110,8 @@ export class LoginComponent implements OnInit {
             text: `Bienvenido ${response.user.name}.`,
             type: 'success',
             onClose: () => {
-              this.router.navigateByUrl('/dashboard');
+              // this.router.navigateByUrl('/dashboard');
+              window.location.href = '/dashboard';
             }
           });
         },
@@ -145,7 +146,8 @@ export class LoginComponent implements OnInit {
               text: `Bienvenido ${response.user.name}.`,
               type: 'success',
               onClose: () => {
-                this.router.navigateByUrl('/dashboard');
+                // this.router.navigateByUrl('/dashboard');
+                window.location.href = '/dashboard';
               }
             });
           },
@@ -155,7 +157,7 @@ export class LoginComponent implements OnInit {
             /*--------------------------------------------------------------------------*/
             Swal.fire({
               title: '¡Algo ha ido mal!',
-              text: error.error.message,
+              text: 'Las credenciales no son válidas.',
               type: 'error'
             });
           }

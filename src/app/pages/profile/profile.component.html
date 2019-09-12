@@ -1,0 +1,123 @@
+<!-- Row -->
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Perfil del usuario</h4>
+        <form
+          ngNativeValidate
+          [formGroup]="form"
+          (ngSubmit)="edit()"
+          class="form p-t-20"
+        >
+          <div class="form-group">
+            <label for="exampleInputuname">Nombre de Usuario</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="ti-user"></i></div>
+              <input
+                formControlName="name"
+                type="text"
+                class="form-control"
+                id="exampleInputuname"
+                placeholder="Usuario"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Correo electrónico</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="ti-email"></i></div>
+              <input
+                formControlName="email"
+                type="email"
+                class="form-control"
+                id="exampleInputEmail1"
+                placeholder="Correo"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="pwd1">Contraseña de usuario</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="ti-lock"></i></div>
+              <input
+                formControlName="password"
+                type="password"
+                class="form-control"
+                id="pwd1"
+                placeholder="Contraseña"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="pwd2">Confirmar contraseña</label>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="ti-lock"></i></div>
+              <input
+                formControlName="verify"
+                type="password"
+                class="form-control"
+                id="pwd2"
+                placeholder="Contraseña"
+                required
+              />
+            </div>
+          </div>
+          <div
+            *ngIf="form.errors && (form.dirty && !form.pristine)"
+            class="form-group"
+          >
+            <div class="col-xs-12">
+              <p class="text-danger">Las contraseñas no coinciden.</p>
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-success waves-effect waves-light float-right"
+          >
+            <i class="fa fa-save mr-2"></i>
+            Guardar
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body text-center">
+        <img *ngIf="!image" [src]="user.image | image:'users'" class="img-thumbnail" alt="user" style="height: 50vh" />
+        <img *ngIf="image" [src]="temporal" class="img-thumbnail" alt="user" style="height: 50vh" />
+        <div class="form-group text-left pt-3">
+          <label for="exampleInputuname">Imagen del usuario</label>
+          <div class="input-group border border-light rounded-lg">
+            <div class="input-group-addon"><i class="ti-image"></i></div>
+            <label for="upload">
+              <span class="p-2" aria-hidden="true" style="width: 100%"
+                >Elija un carhivo</span
+              >
+              <input
+                (change)="charged($event.target.files[0])"
+                type="file"
+                id="upload"
+                style="display:none"
+              />
+            </label>
+          </div>
+        </div>
+        <button
+          [disabled]="!image"
+          (click)="editImage()"
+          type="button"
+          class="btn btn-success waves-effect waves-light float-right"
+        >
+          <i class="fa fa-save mr-2"></i>
+          Actualizar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Row -->

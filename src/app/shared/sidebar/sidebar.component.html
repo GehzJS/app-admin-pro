@@ -12,25 +12,25 @@
             class="has-arrow waves-effect waves-dark"
             href="#"
             aria-expanded="false"
-            ><img src="../assets/images/users/profile.png" alt="user" /><span
+            ><img [src]="user.image | image:'users'" alt="user" /><span
               class="hide-menu"
-              >Steave Jobs
+              >{{ user.name }}
             </span></a
           >
           <ul aria-expanded="false" class="collapse">
-            <li><a href="javascript:void()">My Profile </a></li>
-            <li><a href="javascript:void()">My Balance</a></li>
-            <li><a href="javascript:void()">Inbox</a></li>
+            <li><a routerLink="/profile" routerLinkActive="active">Mi perfil</a></li>
+            <li><a href="javascript:void()" routerLinkActive="active">Mis estadísticas</a></li>
+            <li><a href="javascript:void()" routerLinkActive="active">Mensajes</a></li>
             <li>
               <a routerLink="/settings" routerLinkActive="active"
-                >Account Setting</a
+                >Ajustes</a
               >
             </li>
-            <li><a (click)="userService.logout()" href="#">Logout</a></li>
+            <li><a (click)="userService.logout()" href="#">Cerrar sesión</a></li>
           </ul>
         </li>
         <li class="nav-devider"></li>
-        <li class="nav-small-cap">PERSONAL</li>
+        <li class="nav-small-cap">SECCIONES</li>
         <li *ngFor="let section of sidebarService.menu">
           <a class="has-arrow waves-effect waves-dark" aria-expanded="false"
             ><i [class]="section.icon"></i

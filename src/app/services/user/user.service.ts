@@ -1,8 +1,9 @@
 /*====================================================================================*/
 /*  IMPORTACIONES DE ANGULAR
 /*====================================================================================*/
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 /*====================================================================================*/
 /*  IMPORTACIONES DE RXJS
 /*====================================================================================*/
@@ -16,10 +17,13 @@ import { API_URL } from 'src/app/config/config';
 /*====================================================================================*/
 import { UserModel } from 'src/app/models/user.model';
 /*====================================================================================*/
+/*  IMPORTACIONES DE LOS SERVICIOS
+/*====================================================================================*/
+import { ImageService } from 'src/app/services/image/image.service';
+/*====================================================================================*/
 /*  IMPORTACIONES DE LIBRERÍAS DE TERCEROS.
 /*====================================================================================*/
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
 /*====================================================================================*/
 /*  CONFIGURACIONES DEL SERVICIO
 /*====================================================================================*/
@@ -38,14 +42,21 @@ export class UserService {
   /*----------------------------------------------------------------------------------*/
   token: string;
   user: UserModel;
+  @Output() userChanges: EventEmitter<UserModel>;
   /*==================================================================================*/
   /*  CONSTRUCTOR
   /*==================================================================================*/
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private imageService: ImageService
+  ) {
     this.token = localStorage.getItem('token');
     if (!this.token) {
       this.token = 'n0t4v4l1dt0k3n';
     }
+    this.user = JSON.parse(localStorage.getItem('user'));
+    this.userChanges = new EventEmitter();
   }
   /*==================================================================================*/
   /*  FUNCIÓN PARA INICIAR SESIÓN CON GOOGLE
@@ -72,6 +83,7 @@ export class UserService {
     const URL = `${API_URL}/login`;
     return this.http.post(URL, user).pipe(
       map((response: any) => {
+        console.log(response);
         this.saveLocalStorage(response.user._id, response.token, response.user);
         if (remember) {
           localStorage.setItem('email', response.user.email);
@@ -104,8 +116,37 @@ export class UserService {
     return this.http.post(URL, user).pipe(
       map((response: any) => {
         if (response.ok) {
+          this.saveLocalStorage(response.user._id, this.token, response.user);
           return response.user;
         }
+      })
+    );
+  }
+  /*==================================================================================*/
+  /*  FUNCIÓN PARA EDITAR UN USUARIO
+  /*==================================================================================*/
+  editUser(user: UserModel) {
+    const URL = `${API_URL}/users/${this.user._id}`;
+    /*--------------------------------------------------------------------------------*/
+    /*  Se realiza la petición.
+    /*--------------------------------------------------------------------------------*/
+    return this.http.put(URL, user).pipe(
+      map((response: any) => {
+        if (response.ok) {
+          this.saveLocalStorage(response.user._id, this.token, response.user);
+          return response.user;
+        }
+      })
+    );
+  }
+  /*==================================================================================*/
+  /*  FUNCIÓN PARA EDITAR LA IMAGEN DE UN USUARIO
+|/*==================================================================================*/
+  editImage(image: File) {
+    return this.imageService.uploadImage(this.user._id, 'users', image).pipe(
+      map((response: any) => {
+        this.saveLocalStorage(response.users._id, this.token, response.users);
+        return response.users;
       })
     );
   }
@@ -130,5 +171,6 @@ export class UserService {
     localStorage.setItem('user', JSON.stringify(user));
     this.token = token;
     this.user = user;
+    this.userChanges.emit(this.user);
   }
 }

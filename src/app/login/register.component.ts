@@ -67,13 +67,13 @@ export class RegisterComponent implements OnInit {
     /*--------------------------------------------------------------------------------*/
     /*  Asignación de datos por defecto.
     /*--------------------------------------------------------------------------------*/
-    this.form.setValue({
-      name: 'qwerty',
-      email: 'qwerty@mail.com',
-      password: 'qwerty',
-      verify: 'qwerty',
-      conditions: true
-    });
+    // this.form.setValue({
+    //   name: 'qwerty',
+    //   email: 'qwerty@mail.com',
+    //   password: 'qwerty',
+    //   verify: 'qwerty',
+    //   conditions: true
+    // });
   }
   /*==================================================================================*/
   /*  FUNCIÓN PARA REGISTRAR UN USUARIO

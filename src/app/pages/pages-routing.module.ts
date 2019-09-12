@@ -14,6 +14,7 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
 import { GraphicsComponent } from './graphics/graphics.component';
+import { ProfileComponent } from './profile/profile.component';
 import { SettingsComponent } from 'src/app/components/settings/settings.component';
 /*====================================================================================*/
 /*  DEFINICIÓN DE RUTAS
@@ -55,6 +56,14 @@ const pagesRoutes: Routes = [
         path: 'settings',
         component: SettingsComponent,
         data: { title: 'Ajustes' }
+      },
+      /*------------------------------------------------------------------------------*/
+      /*  Ruta del perfil de usuario.
+      /*------------------------------------------------------------------------------*/
+      {
+        path: 'profile',
+        component: ProfileComponent,
+        data: { title: 'Perfil' }
       },
       /*------------------------------------------------------------------------------*/
       /*  Ruta por defecto.
