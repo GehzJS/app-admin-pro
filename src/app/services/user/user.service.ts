@@ -21,10 +21,6 @@ import { UserModel } from 'src/app/models/user.model';
 /*====================================================================================*/
 import { ImageService } from 'src/app/services/image/image.service';
 /*====================================================================================*/
-/*  IMPORTACIONES DE LIBRERÍAS DE TERCEROS.
-/*====================================================================================*/
-import Swal from 'sweetalert2';
-/*====================================================================================*/
 /*  CONFIGURACIONES DEL SERVICIO
 /*====================================================================================*/
 @Injectable({
@@ -41,7 +37,13 @@ export class UserService {
   /*  Token del usuario (con un valor por defecto).
   /*----------------------------------------------------------------------------------*/
   token: string;
+  /*----------------------------------------------------------------------------------*/
+  /*  Variable de usuario.
+  /*----------------------------------------------------------------------------------*/
   user: UserModel;
+  /*----------------------------------------------------------------------------------*/
+  /*  Evento para actualizar el usuario en otros componentes.
+  /*----------------------------------------------------------------------------------*/
   @Output() userChanges: EventEmitter<UserModel>;
   /*==================================================================================*/
   /*  CONSTRUCTOR
@@ -83,7 +85,6 @@ export class UserService {
     const URL = `${API_URL}/login`;
     return this.http.post(URL, user).pipe(
       map((response: any) => {
-        console.log(response);
         this.saveLocalStorage(response.user._id, response.token, response.user);
         if (remember) {
           localStorage.setItem('email', response.user.email);
@@ -104,6 +105,20 @@ export class UserService {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.router.navigateByUrl('/login');
+  }
+  /*==================================================================================*/
+  /*  FUNCIÓN PARA OBTENER LOS USUARIOS
+  /*==================================================================================*/
+  getUsers(page: number) {
+    const URL = `${API_URL}/users/?offset=${page}`;
+    return this.http.get(URL);
+  }
+  /*==================================================================================*/
+  /*  FUNCIÓN PARA BUSCAR USUARIOS
+  /*==================================================================================*/
+  searchUsers(keyword: string) {
+    const URL = `${API_URL}/search/collection/users/${keyword}`;
+    return this.http.get(URL).pipe(map((response: any) => response.users));
   }
   /*==================================================================================*/
   /*  FUNCIÓN PARA GUARGAR UN USUARIO
@@ -133,9 +148,11 @@ export class UserService {
     return this.http.put(URL, user).pipe(
       map((response: any) => {
         if (response.ok) {
-          this.saveLocalStorage(response.user._id, this.token, response.user);
-          return response.user;
+          if (this.user._id === user._id) {
+            this.saveLocalStorage(response.user._id, this.token, response.user);
+          }
         }
+        return response.user;
       })
     );
   }
@@ -145,10 +162,19 @@ export class UserService {
   editImage(image: File) {
     return this.imageService.uploadImage(this.user._id, 'users', image).pipe(
       map((response: any) => {
-        this.saveLocalStorage(response.users._id, this.token, response.users);
+        if (response.ok) {
+          this.saveLocalStorage(response.users._id, this.token, response.users);
+        }
         return response.users;
       })
     );
+  }
+  /*==================================================================================*/
+  /*  FUNCIÓN PARA BORRAR UN USUARIO
+  /*==================================================================================*/
+  deleteUser(id: string) {
+    const URL = `${API_URL}/users/${id}`;
+    return this.http.delete(URL).pipe(map((response: any) => response.user));
   }
   /*==================================================================================*/
   /*  FUNCIÓN PARA GENERAR UN USUARIO VÁLIDO
@@ -159,7 +185,8 @@ export class UserService {
       user.email,
       user.password,
       user.image ? user.image : null,
-      user.role ? user.role : 'USER_ROLE'
+      user.role ? user.role : 'USER_ROLE',
+      user.google ? true : false
     );
   }
   /*==================================================================================*/

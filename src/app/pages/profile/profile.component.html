@@ -1,6 +1,6 @@
 <!-- Row -->
 <div class="row">
-  <div class="col-lg-6">
+  <div class="col-lg-6 animated fadeInLeft slow">
     <div class="card">
       <div class="card-body">
         <h4 class="card-title">Perfil del usuario</h4>
@@ -85,7 +85,7 @@
       </div>
     </div>
   </div>
-  <div class="col-lg-6">
+  <div class="col-lg-6 animated fadeInLeft slow">
     <div class="card">
       <div class="card-body text-center">
         <img *ngIf="!image" [src]="user.image | image:'users'" class="img-thumbnail" alt="user" style="height: 50vh" />
@@ -96,7 +96,7 @@
             <div class="input-group-addon"><i class="ti-image"></i></div>
             <label for="upload">
               <span class="p-2" aria-hidden="true" style="width: 100%"
-                >Elija un carhivo</span
+                >Elija un archivo</span
               >
               <input
                 (change)="charged($event.target.files[0])"

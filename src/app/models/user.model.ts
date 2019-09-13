@@ -8,7 +8,7 @@ export class UserModel {
     public password: string,
     public image?: string,
     public role?: string,
-    public google?: string,
+    public google?: boolean,
     public _id?: string
   ) {}
 }

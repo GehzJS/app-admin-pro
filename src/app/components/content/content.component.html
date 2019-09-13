@@ -1,0 +1,52 @@
+<app-upload
+  [title]="title"
+  [temporal]="temporal"
+  [image]="image"
+  [collection]="collection"
+  [model]="model"
+>
+  <div class="card m-0 p-0">
+    <div class="card-body text-center">
+      <img
+        *ngIf="!image"
+        [src]="model.image | image: collection"
+        class="img-thumbnail"
+        alt="model"
+        style="height: 25vh"
+      />
+      <img
+        *ngIf="image"
+        [src]="temporal"
+        class="img-thumbnail"
+        alt="model"
+        style="height: 50vh"
+      />
+      <div class="form-group text-left pt-3">
+        <!-- <label for="exampleInputuname">Imagen del usuario</label> -->
+        <div class="input-group border border-light rounded-lg">
+          <div class="input-group-addon"><i class="ti-image"></i></div>
+          <label for="upload">
+            <span class="p-2" aria-hidden="true" style="width: 100%"
+              >Elija un archivo</span
+            >
+            <input
+              (change)="charged($event.target.files[0])"
+              type="file"
+              id="upload"
+              style="display:none"
+            />
+          </label>
+        </div>
+      </div>
+      <!-- (click)="editImage()" -->
+      <!-- <button
+        [disabled]="!image"
+        type="button"
+        class="btn btn-success waves-effect waves-light float-right"
+      >
+        <i class="fa fa-save mr-2"></i>
+        Actualizar
+      </button> -->
+    </div>
+  </div>
+</app-upload>

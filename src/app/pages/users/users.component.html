@@ -1,0 +1,116 @@
+<div class="row">
+  <div *ngIf="cargando" class="col-12 animated fadeInLeft slow">
+    <div class="jumbotron jumbotron-fluid text-center">
+      <div class="container">
+        <h1 class="display-4">Cargando...</h1>
+        <i class="fa fa-spinner fa-spin fa-5x my-3"></i>
+        <p class="lead">Espere por favor</p>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!cargando" class="col-12 animated fadeInLeft slow">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-6">
+            <h4 class="card title">
+              Listado de usuarios <small>{{ total }} registros</small>
+            </h4>
+          </div>
+          <div class="col-6">
+            <input
+              #search
+              (keyup)="searchUser(search.value)"
+              type="text"
+              class="form-control"
+              placeholder="Buscar usuario..."
+            />
+          </div>
+        </div>
+        <table class="table table-striped">
+          <thead class="thead-inverse">
+            <tr>
+              <th>Imagen</th>
+              <th>Nombre</th>
+              <th>Correo</th>
+              <th>Rol</th>
+              <th>Autenticación</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users">
+              <td class="text-center" style="width: 3rem">
+                <img
+                  (click)="open(user)"
+                  [src]="user.image | image: 'users'"
+                  class="img-thumbnail"
+                  style="width:100%"
+                />
+              </td>
+              <td>{{ user.name }}</td>
+              <td>{{ user.email }}</td>
+              <td>
+                <select [(ngModel)]="user.role" class="custom-select">
+                  <option
+                    *ngFor="let role of roles"
+                    [value]="role"
+                    [selected]="role === user.role"
+                    >{{ role }}</option
+                  >
+                </select>
+              </td>
+              <td>
+                <label
+                  class="label p-2"
+                  [ngClass]="{
+                    'label-danger': user.google,
+                    'label-success': !user.google
+                  }"
+                >
+                  {{ user.google ? 'Google' : 'Local' }}
+                </label>
+              </td>
+              <td>
+                <button
+                  (click)="edit(user)"
+                  type="button"
+                  class="btn btn-success mx-1"
+                >
+                  <i class="fa fa-check"></i>
+                </button>
+                <button
+                  (click)="modalDelete(user)"
+                  type="button"
+                  class="btn btn-danger mx-1"
+                >
+                  <i class="fa fa-close"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div *ngIf="search.value.length === 0" class="row">
+          <div class="col-12 text-center">
+            <button
+              (click)="loadData(-5)"
+              [disabled]="page <= 0"
+              type="button"
+              class="btn btn-inverse mx-1"
+            >
+              <i class="fa fa-arrow-left"></i>
+            </button>
+            <button
+              (click)="loadData(5)"
+              [disabled]="page + 5 >= total"
+              type="button"
+              class="btn btn-inverse mx-1"
+            >
+              <i class="fa fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

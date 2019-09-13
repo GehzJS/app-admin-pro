@@ -20,12 +20,21 @@ export class SidebarService {
   /*----------------------------------------------------------------------------------*/
   menu: any[] = [
     {
-      title: 'Main',
+      title: 'Principal',
       icon: 'mdi mdi-gauge',
       items: [
         { title: 'Dashboard', link: '/dashboard' },
-        { title: 'Graphics', link: '/graphics' },
-        { title: 'Progress', link: '/progress' }
+        { title: 'Gráficas', link: '/graphics' },
+        { title: 'Progreso', link: '/progress' }
+      ]
+    },
+    {
+      title: 'Gestión',
+      icon: 'mdi mdi-folder-lock-open',
+      items: [
+        { title: 'Doctores', link: '/doctors' },
+        { title: 'Hospitales', link: '/hospitals' },
+        { title: 'Usuarios', link: '/users' }
       ]
     }
   ];

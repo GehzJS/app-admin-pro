@@ -39,7 +39,7 @@ export class ProfileComponent implements OnInit {
   /*----------------------------------------------------------------------------------*/
   user: UserModel;
   /*----------------------------------------------------------------------------------*/
-  /*  Variable de la imagen.
+  /*  Variables de la imagen.
   /*----------------------------------------------------------------------------------*/
   image: File;
   temporal: any;
@@ -87,6 +87,9 @@ export class ProfileComponent implements OnInit {
   /*==================================================================================*/
   edit() {
     if (this.form.valid) {
+      /*------------------------------------------------------------------------------*/
+      /*  Se genera un suario válido y se realiza la petición.
+      /*------------------------------------------------------------------------------*/
       const newUser = this.userService.generateUser({
         name: this.form.controls.name.value,
         email: this.user.google
@@ -111,7 +114,7 @@ export class ProfileComponent implements OnInit {
           /*--------------------------------------------------------------------------*/
           Swal.fire({
             title: '¡Algo ha ido mal!',
-            text: error.error.message,
+            text: 'Ha ocurrido un error al editar el usuario.',
             type: 'error'
           });
         }
@@ -138,10 +141,15 @@ export class ProfileComponent implements OnInit {
       }
     };
   }
-
+  /*==================================================================================*/
+  /*  FUNCIÓN CONTROLAR LA IMAGEN
+  /*==================================================================================*/
   charged(image: File) {
     if (image) {
       if (image.type.indexOf('image') >= 0) {
+        /*----------------------------------------------------------------------------*/
+        /*  Se genera la vista previa de la imagen.
+        /*----------------------------------------------------------------------------*/
         this.image = image;
         const reader = new FileReader();
         const temporalUrl = reader.readAsDataURL(image);
@@ -159,7 +167,9 @@ export class ProfileComponent implements OnInit {
       }
     }
   }
-
+  /*==================================================================================*/
+  /*  FUNCIÓN EDITAR LA IMAGEN
+  /*==================================================================================*/
   editImage() {
     this.userService.editImage(this.image).subscribe(
       (response: any) => {

@@ -97,7 +97,6 @@ export class LoginComponent implements OnInit {
     /*--------------------------------------------------------------------------------*/
     this.auth2.attachClickHandler(element, {}, user => {
       // const profile = user.getBasicProfile();
-      // console.log(profile);
       const token = user.getAuthResponse().id_token;
       this.userService.token = token;
       this.userService.loginGoogle().subscribe(

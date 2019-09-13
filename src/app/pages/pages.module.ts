@@ -17,6 +17,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { GraphicsComponent } from './graphics/graphics.component';
 import { ProgressComponent } from './progress/progress.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UsersComponent } from './users/users.component';
+import { UploadComponent } from 'src/app/components/upload/upload.component';
 import { ChartComponent } from 'src/app/components/chart/chart.component';
 import { SettingsComponent } from 'src/app/components/settings/settings.component';
 /*====================================================================================*/
@@ -27,6 +29,8 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
 /*  IMPORTACIONES DE LIBRERÍAS DE TERCEROS
 /*====================================================================================*/
 import { ChartsModule } from 'ng2-charts';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ContentComponent } from '../components/content/content.component';
 /*====================================================================================*/
 /*  CONFIGURACIONES DEL MODULO
 /*====================================================================================*/
@@ -41,7 +45,10 @@ import { ChartsModule } from 'ng2-charts';
     ProgressComponent,
     ChartComponent,
     SettingsComponent,
-    ProfileComponent
+    ProfileComponent,
+    UsersComponent,
+    UploadComponent,
+    ContentComponent
   ],
   /*----------------------------------------------------------------------------------*/
   /* Importaciones (modulos).
@@ -53,7 +60,8 @@ import { ChartsModule } from 'ng2-charts';
     ChartsModule,
     PipesModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   /*----------------------------------------------------------------------------------*/
   /* Exportaciones (componentes).
@@ -63,6 +71,8 @@ import { ChartsModule } from 'ng2-charts';
     DashboardComponent,
     GraphicsComponent,
     ProgressComponent
-  ]
+  ],
+  providers: [NgbActiveModal],
+  entryComponents: [ContentComponent]
 })
 export class PagesModule {}
