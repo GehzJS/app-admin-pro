@@ -12,19 +12,28 @@
     <div class="card">
       <div class="card-body">
         <div class="row">
-          <div class="col-6">
+          <div class="col-3">
             <h4 class="card title">
-              Listado de usuarios <small>{{ total }} registros</small>
+              Listado de hospitales <small>{{ total }} registros</small>
             </h4>
           </div>
           <div class="col-6">
             <input
               #search
-              (keyup)="searchUser(search.value)"
+              (keyup)="searchHospital(search.value)"
               type="text"
               class="form-control"
-              placeholder="Buscar usuario..."
+              placeholder="Buscar hospital..."
             />
+          </div>
+          <div class="col-3 text-right">
+            <button
+              (click)="modalSave()"
+              type="button"
+              class="btn btn-primary btn-rounded waves-effect waves-light"
+            >
+              <i class="fa fa-plus"></i> Nuevo hospital
+            </button>
           </div>
         </div>
         <table class="table table-striped">
@@ -32,55 +41,44 @@
             <tr>
               <th>Imagen</th>
               <th>Nombre</th>
-              <th>Correo</th>
-              <th>Rol</th>
-              <th>Autenticación</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let user of users">
+            <tr *ngFor="let hospital of hospitals">
               <td class="text-center" style="width: 3rem">
                 <img
-                  (click)="open(user)"
-                  [src]="user.image | image:'users'"
+                  (click)="open(hospital)"
+                  [src]="hospital.image | image:'hospitals'"
                   class="img-thumbnail"
                   style="width:100%; cursor: pointer"
                 />
               </td>
-              <td>{{ user.name }}</td>
-              <td>{{ user.email }}</td>
               <td>
-                <select [(ngModel)]="user.role" class="custom-select">
-                  <option
-                    *ngFor="let role of roles"
-                    [value]="role"
-                    [selected]="role === user.role"
-                    >{{ role }}</option
-                  >
-                </select>
-              </td>
-              <td>
-                <label
-                  class="label p-2"
-                  [ngClass]="{
-                    'label-danger': user.google,
-                    'label-success': !user.google
-                  }"
+                <p
+                  *ngIf="hospital._id !== active"
+                  (click)="activeText(hospital._id)"
                 >
-                  {{ user.google ? 'Google' : 'Local' }}
-                </label>
+                  {{ hospital.name }}
+                </p>
+                <input
+                  *ngIf="hospital._id === active"
+                  [(ngModel)]="hospital.name"
+                  type="text"
+                  class="form-control"
+                  name="hospital"
+                />
               </td>
               <td>
                 <button
-                  (click)="edit(user)"
+                  (click)="edit(hospital)"
                   type="button"
                   class="btn btn-success mx-1"
                 >
                   <i class="fa fa-check"></i>
                 </button>
                 <button
-                  (click)="modalDelete(user)"
+                  (click)="modalDelete(hospital)"
                   type="button"
                   class="btn btn-danger mx-1"
                 >

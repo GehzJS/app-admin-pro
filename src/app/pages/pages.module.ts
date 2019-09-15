@@ -31,6 +31,9 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ContentComponent } from '../components/content/content.component';
+import { HospitalsComponent } from './hospitals/hospitals.component';
+import { DoctorsComponent } from './doctors/doctors.component';
+import { DoctorComponent } from './doctors/doctor.component';
 /*====================================================================================*/
 /*  CONFIGURACIONES DEL MODULO
 /*====================================================================================*/
@@ -48,7 +51,10 @@ import { ContentComponent } from '../components/content/content.component';
     ProfileComponent,
     UsersComponent,
     UploadComponent,
-    ContentComponent
+    ContentComponent,
+    HospitalsComponent,
+    DoctorsComponent,
+    DoctorComponent
   ],
   /*----------------------------------------------------------------------------------*/
   /* Importaciones (modulos).

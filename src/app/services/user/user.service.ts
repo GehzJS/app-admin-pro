@@ -158,7 +158,7 @@ export class UserService {
   }
   /*==================================================================================*/
   /*  FUNCIÓN PARA EDITAR LA IMAGEN DE UN USUARIO
-|/*==================================================================================*/
+  /*==================================================================================*/
   editImage(image: File) {
     return this.imageService.uploadImage(this.user._id, 'users', image).pipe(
       map((response: any) => {

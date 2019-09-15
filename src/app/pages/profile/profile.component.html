@@ -74,6 +74,11 @@
               <p class="text-danger">Las contraseñas no coinciden.</p>
             </div>
           </div>
+          <a
+            class="btn btn-secondary waves-effect waves-light float-right ml-2"
+            routerLink="/dashboard"
+            ><i class="fa fa-arrow-left mr-2"></i>Regresar</a
+          >
           <button
             type="submit"
             class="btn btn-success waves-effect waves-light float-right"
@@ -88,8 +93,20 @@
   <div class="col-lg-6 animated fadeInLeft slow">
     <div class="card">
       <div class="card-body text-center">
-        <img *ngIf="!image" [src]="user.image | image:'users'" class="img-thumbnail" alt="user" style="height: 50vh" />
-        <img *ngIf="image" [src]="temporal" class="img-thumbnail" alt="user" style="height: 50vh" />
+        <img
+          *ngIf="!image"
+          [src]="user.image | image: 'users'"
+          class="img-thumbnail"
+          alt="user"
+          style="height: 50vh"
+        />
+        <img
+          *ngIf="image"
+          [src]="temporal"
+          class="img-thumbnail"
+          alt="user"
+          style="height: 50vh"
+        />
         <div class="form-group text-left pt-3">
           <label for="exampleInputuname">Imagen del usuario</label>
           <div class="input-group border border-light rounded-lg">

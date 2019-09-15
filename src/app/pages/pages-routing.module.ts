@@ -17,6 +17,9 @@ import { GraphicsComponent } from './graphics/graphics.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UsersComponent } from './users/users.component';
 import { SettingsComponent } from 'src/app/components/settings/settings.component';
+import { HospitalsComponent } from './hospitals/hospitals.component';
+import { DoctorsComponent } from './doctors/doctors.component';
+import { DoctorComponent } from './doctors/doctor.component';
 /*====================================================================================*/
 /*  DEFINICIÓN DE RUTAS
 /*====================================================================================*/
@@ -73,6 +76,30 @@ const pagesRoutes: Routes = [
         path: 'users',
         component: UsersComponent,
         data: { title: 'Usuarios' }
+      },
+      /*------------------------------------------------------------------------------*/
+      /*  Ruta de los hospitales.
+      /*------------------------------------------------------------------------------*/
+      {
+        path: 'hospitals',
+        component: HospitalsComponent,
+        data: { title: 'Hospitales' }
+      },
+      /*------------------------------------------------------------------------------*/
+      /*  Ruta de los doctores.
+      /*------------------------------------------------------------------------------*/
+      {
+        path: 'doctors',
+        component: DoctorsComponent,
+        data: { title: 'Doctores' }
+      },
+      /*------------------------------------------------------------------------------*/
+      /*  Ruta del doctor.
+      /*------------------------------------------------------------------------------*/
+      {
+        path: 'doctor/:id',
+        component: DoctorComponent,
+        data: { title: 'Doctor' }
       },
       /*------------------------------------------------------------------------------*/
       /*  Ruta por defecto.

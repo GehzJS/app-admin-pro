@@ -12,19 +12,28 @@
     <div class="card">
       <div class="card-body">
         <div class="row">
-          <div class="col-6">
+          <div class="col-3">
             <h4 class="card title">
-              Listado de usuarios <small>{{ total }} registros</small>
+              Listado de doctores <small>{{ total }} registros</small>
             </h4>
           </div>
           <div class="col-6">
             <input
               #search
-              (keyup)="searchUser(search.value)"
+              (keyup)="searchDoctor(search.value)"
               type="text"
               class="form-control"
-              placeholder="Buscar usuario..."
+              placeholder="Buscar doctor..."
             />
+          </div>
+          <div class="col-3 text-right">
+            <button
+              [routerLink]="['/doctor', 'new']"
+              type="button"
+              class="btn btn-primary btn-rounded waves-effect waves-light"
+            >
+              <i class="fa fa-plus"></i> Nuevo doctor
+            </button>
           </div>
         </div>
         <table class="table table-striped">
@@ -32,55 +41,32 @@
             <tr>
               <th>Imagen</th>
               <th>Nombre</th>
-              <th>Correo</th>
-              <th>Rol</th>
-              <th>Autenticación</th>
+              <th>Hospital</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let user of users">
+            <tr *ngFor="let doctor of doctors">
               <td class="text-center" style="width: 3rem">
                 <img
-                  (click)="open(user)"
-                  [src]="user.image | image:'users'"
+                  (click)="open(doctor)"
+                  [src]="doctor.image | image:'doctors'"
                   class="img-thumbnail"
                   style="width:100%; cursor: pointer"
                 />
               </td>
-              <td>{{ user.name }}</td>
-              <td>{{ user.email }}</td>
-              <td>
-                <select [(ngModel)]="user.role" class="custom-select">
-                  <option
-                    *ngFor="let role of roles"
-                    [value]="role"
-                    [selected]="role === user.role"
-                    >{{ role }}</option
-                  >
-                </select>
-              </td>
-              <td>
-                <label
-                  class="label p-2"
-                  [ngClass]="{
-                    'label-danger': user.google,
-                    'label-success': !user.google
-                  }"
-                >
-                  {{ user.google ? 'Google' : 'Local' }}
-                </label>
-              </td>
+              <td>{{ doctor.name }}</td>
+              <td>{{ doctor.hospital.name }}</td>
               <td>
                 <button
-                  (click)="edit(user)"
+                  [routerLink]="['/doctor', doctor._id]"
                   type="button"
                   class="btn btn-success mx-1"
                 >
                   <i class="fa fa-check"></i>
                 </button>
                 <button
-                  (click)="modalDelete(user)"
+                  (click)="modalDelete(doctor)"
                   type="button"
                   class="btn btn-danger mx-1"
                 >
