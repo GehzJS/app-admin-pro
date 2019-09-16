@@ -4,13 +4,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 /*====================================================================================*/
-/*  IMPORTACIONES DE GUARDS
-/*====================================================================================*/
-import { LoginGuard } from 'src/app/guards/login.guard';
-/*====================================================================================*/
 /*  IMPORTACIONES DE COMPONENTES
 /*====================================================================================*/
-import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
 import { GraphicsComponent } from './graphics/graphics.component';
@@ -25,102 +20,105 @@ import { SearchComponent } from './search/search.component';
 /*  IMPORTACIONES DE GUARDS
 /*====================================================================================*/
 import { AdminGuard } from 'src/app/guards/admin.guard';
+import { VerifyTokenGuard } from 'src/app/guards/verify-token.guard';
 /*====================================================================================*/
 /*  DEFINICIÓN DE RUTAS
 /*====================================================================================*/
 const pagesRoutes: Routes = [
+  /*------------------------------------------------------------------------------*/
+  /*  Ruta del dashboard.
+      /*------------------------------------------------------------------------------*/
   {
-    path: '',
-    component: PagesComponent,
-    canActivate: [LoginGuard],
-    children: [
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [VerifyTokenGuard],
+    data: { title: 'Dashboard' }
+  },
+  /*------------------------------------------------------------------------------*/
+  /*  Ruta las barras de progreso.
       /*------------------------------------------------------------------------------*/
-      /*  Ruta del dashboard.
+  {
+    path: 'progress',
+    component: ProgressComponent,
+    canActivate: [VerifyTokenGuard],
+    data: { title: 'Progreso' }
+  },
+  /*------------------------------------------------------------------------------*/
+  /*  Ruta de las gráficas.
       /*------------------------------------------------------------------------------*/
-      {
-        path: 'dashboard',
-        component: DashboardComponent,
-        data: { title: 'Dashboard' }
-      },
+  {
+    path: 'graphics',
+    component: GraphicsComponent,
+    canActivate: [VerifyTokenGuard],
+    data: { title: 'Graficas' }
+  },
+  /*------------------------------------------------------------------------------*/
+  /*  Ruta de las configuraciones.
       /*------------------------------------------------------------------------------*/
-      /*  Ruta las barras de progreso.
+  {
+    path: 'settings',
+    component: SettingsComponent,
+    canActivate: [VerifyTokenGuard],
+    data: { title: 'Ajustes' }
+  },
+  /*------------------------------------------------------------------------------*/
+  /*  Ruta del perfil de usuario.
       /*------------------------------------------------------------------------------*/
-      {
-        path: 'progress',
-        component: ProgressComponent,
-        data: { title: 'Progreso' }
-      },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+    canActivate: [VerifyTokenGuard],
+    data: { title: 'Perfil' }
+  },
+  /*------------------------------------------------------------------------------*/
+  /*  Ruta del perfil de usuario.
       /*------------------------------------------------------------------------------*/
-      /*  Ruta de las gráficas.
+  {
+    path: 'search/:keyword',
+    component: SearchComponent,
+    canActivate: [VerifyTokenGuard],
+    data: { title: 'Buscador' }
+  },
+  /*------------------------------------------------------------------------------*/
+  /*  Ruta de los usuarios.
       /*------------------------------------------------------------------------------*/
-      {
-        path: 'graphics',
-        component: GraphicsComponent,
-        data: { title: 'Graficas' }
-      },
+  {
+    path: 'users',
+    component: UsersComponent,
+    canActivate: [AdminGuard, VerifyTokenGuard],
+    data: { title: 'Usuarios' }
+  },
+  /*------------------------------------------------------------------------------*/
+  /*  Ruta de los hospitales.
       /*------------------------------------------------------------------------------*/
-      /*  Ruta de las configuraciones.
+  {
+    path: 'hospitals',
+    component: HospitalsComponent,
+    canActivate: [VerifyTokenGuard],
+    data: { title: 'Hospitales' }
+  },
+  /*------------------------------------------------------------------------------*/
+  /*  Ruta de los doctores.
       /*------------------------------------------------------------------------------*/
-      {
-        path: 'settings',
-        component: SettingsComponent,
-        data: { title: 'Ajustes' }
-      },
+  {
+    path: 'doctors',
+    component: DoctorsComponent,
+    canActivate: [VerifyTokenGuard],
+    data: { title: 'Doctores' }
+  },
+  /*------------------------------------------------------------------------------*/
+  /*  Ruta del doctor.
       /*------------------------------------------------------------------------------*/
-      /*  Ruta del perfil de usuario.
+  {
+    path: 'doctor/:id',
+    component: DoctorComponent,
+    canActivate: [VerifyTokenGuard],
+    data: { title: 'Doctor' }
+  },
+  /*------------------------------------------------------------------------------*/
+  /*  Ruta por defecto.
       /*------------------------------------------------------------------------------*/
-      {
-        path: 'profile',
-        component: ProfileComponent,
-        data: { title: 'Perfil' }
-      },
-      /*------------------------------------------------------------------------------*/
-      /*  Ruta del perfil de usuario.
-      /*------------------------------------------------------------------------------*/
-      {
-        path: 'search/:keyword',
-        component: SearchComponent,
-        data: { title: 'Buscador' }
-      },
-      /*------------------------------------------------------------------------------*/
-      /*  Ruta de los usuarios.
-      /*------------------------------------------------------------------------------*/
-      {
-        path: 'users',
-        component: UsersComponent,
-        canActivate: [AdminGuard],
-        data: { title: 'Usuarios' }
-      },
-      /*------------------------------------------------------------------------------*/
-      /*  Ruta de los hospitales.
-      /*------------------------------------------------------------------------------*/
-      {
-        path: 'hospitals',
-        component: HospitalsComponent,
-        data: { title: 'Hospitales' }
-      },
-      /*------------------------------------------------------------------------------*/
-      /*  Ruta de los doctores.
-      /*------------------------------------------------------------------------------*/
-      {
-        path: 'doctors',
-        component: DoctorsComponent,
-        data: { title: 'Doctores' }
-      },
-      /*------------------------------------------------------------------------------*/
-      /*  Ruta del doctor.
-      /*------------------------------------------------------------------------------*/
-      {
-        path: 'doctor/:id',
-        component: DoctorComponent,
-        data: { title: 'Doctor' }
-      },
-      /*------------------------------------------------------------------------------*/
-      /*  Ruta por defecto.
-      /*------------------------------------------------------------------------------*/
-      { path: '', pathMatch: 'full', redirectTo: 'dashboard' }
-    ]
-  }
+  { path: '', pathMatch: 'full', redirectTo: 'dashboard' }
 ];
 /*====================================================================================*/
 /*  CONFIGURACIONES DEL MODULO

@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-4">
+  <div class="col-4 animated fadeInDown slow">
     <div class="card">
       <div *ngIf="users" class="card-body">
         <h4 class="card-title">
@@ -15,7 +15,7 @@
             >
               <td style="width: 70px">
                 <img
-                  [src]="user.image | image:'users'"
+                  [src]="user.image | image: 'users'"
                   class="img-thumbnail"
                   alt="user"
                   style="max-width:100%"
@@ -28,7 +28,7 @@
       </div>
     </div>
   </div>
-  <div class="col-4">
+  <div class="col-4 animated fadeInDown slow">
     <div class="card">
       <div *ngIf="hospitals" class="card-body">
         <h4 class="card-title">
@@ -44,7 +44,7 @@
             >
               <td style="width: 70px">
                 <img
-                  [src]="hospital.image | image:'hospitals'"
+                  [src]="hospital.image | image: 'hospitals'"
                   class="img-thumbnail"
                   alt="hospital"
                   style="max-width:100%"
@@ -57,7 +57,7 @@
       </div>
     </div>
   </div>
-  <div class="col-4">
+  <div class="col-4 animated fadeInDown slow">
     <div class="card">
       <div *ngIf="doctors" class="card-body">
         <h4 class="card-title">
@@ -73,7 +73,7 @@
             >
               <td style="width: 70px">
                 <img
-                  [src]="doctor.image | image:'doctors'"
+                  [src]="doctor.image | image: 'doctors'"
                   class="img-thumbnail"
                   alt="doctor"
                   style="max-width:100%"

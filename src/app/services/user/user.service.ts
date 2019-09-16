@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 /*====================================================================================*/
 /*  IMPORTACIONES DE RXJS
 /*====================================================================================*/
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 /*====================================================================================*/
 /*  IMPORTACIONES DE LAS VARIABLES DE ENTORNO
 /*====================================================================================*/
@@ -20,6 +20,10 @@ import { UserModel } from 'src/app/models/user.model';
 /*  IMPORTACIONES DE LOS SERVICIOS
 /*====================================================================================*/
 import { ImageService } from 'src/app/services/image/image.service';
+/*====================================================================================*/
+/*  IMPORTACIONES DE LIBERÍAS DE TERCEROS
+/*====================================================================================*/
+import Swal from 'sweetalert2';
 /*====================================================================================*/
 /*  CONFIGURACIONES DEL SERVICIO
 /*====================================================================================*/
@@ -63,10 +67,36 @@ export class UserService {
     this.userChanges = new EventEmitter();
   }
   /*==================================================================================*/
-  /*  FUNCIÓN PARA INICIAR SESIÓN CON GOOGLE
+  /*  FUNCIÓN PARA COMPROBAR SI LA SESIÓN ES VÁLIDA
   /*==================================================================================*/
   userLoggedIn() {
     return this.token !== 'n0t4v4l1dt0k3n' && this.token.length > 20;
+  }
+  /*==================================================================================*/
+  /*  FUNCIÓN PARA RENOVAR EL TOKEN
+  /*==================================================================================*/
+  renewToken() {
+    const URL = `${API_URL}/login/renew`;
+    return this.http.get(URL).pipe(
+      map((response: any) => {
+        this.token = response.token;
+        localStorage.setItem('token', response.token);
+      }),
+      catchError((error: any) => {
+        /*--------------------------------------------------------------------------*/
+        /*  Se notifica al usuario que ha ocurrido un error.
+        /*--------------------------------------------------------------------------*/
+        Swal.fire({
+          title: '¡Algo ha ido mal!',
+          text: 'No es posible renovar la sesión automáticamente.',
+          type: 'error',
+          onClose: () => {
+            this.router.navigateByUrl('/login');
+          }
+        });
+        return error;
+      })
+    );
   }
   /*==================================================================================*/
   /*  FUNCIÓN PARA INICIAR SESIÓN CON GOOGLE

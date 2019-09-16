@@ -18,7 +18,6 @@ import { GraphicsComponent } from './graphics/graphics.component';
 import { ProgressComponent } from './progress/progress.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UsersComponent } from './users/users.component';
-import { UploadComponent } from 'src/app/components/upload/upload.component';
 import { ChartComponent } from 'src/app/components/chart/chart.component';
 import { SettingsComponent } from 'src/app/components/settings/settings.component';
 /*====================================================================================*/
@@ -43,7 +42,6 @@ import { SearchComponent } from './search/search.component';
   /* Declaraciones (componentes).
   /*----------------------------------------------------------------------------------*/
   declarations: [
-    PagesComponent,
     DashboardComponent,
     GraphicsComponent,
     ProgressComponent,
@@ -51,7 +49,6 @@ import { SearchComponent } from './search/search.component';
     SettingsComponent,
     ProfileComponent,
     UsersComponent,
-    UploadComponent,
     ContentComponent,
     HospitalsComponent,
     DoctorsComponent,
@@ -74,12 +71,7 @@ import { SearchComponent } from './search/search.component';
   /*----------------------------------------------------------------------------------*/
   /* Exportaciones (componentes).
   /*----------------------------------------------------------------------------------*/
-  exports: [
-    PagesComponent,
-    DashboardComponent,
-    GraphicsComponent,
-    ProgressComponent
-  ],
+  exports: [DashboardComponent, GraphicsComponent, ProgressComponent],
   providers: [NgbActiveModal],
   entryComponents: [ContentComponent]
 })

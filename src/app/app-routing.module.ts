@@ -9,6 +9,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register.component';
 import { NoPageComponent } from './shared/no-page/no-page.component';
+import { PagesComponent } from './pages/pages.component';
+/*====================================================================================*/
+/*  IMPORTACIONES DE GUARDS
+/*====================================================================================*/
+import { LoginGuard } from 'src/app/guards/login.guard';
 /*====================================================================================*/
 /*  DEFINICIÓN DE RUTAS
 /*====================================================================================*/
@@ -21,6 +26,15 @@ const routes: Routes = [
   /*  Ruta del registro.
   /*----------------------------------------------------------------------------------*/
   { path: 'register', component: RegisterComponent },
+  /*----------------------------------------------------------------------------------*/
+  /*  Ruta de las páginas.
+  /*----------------------------------------------------------------------------------*/
+  {
+    path: '',
+    component: PagesComponent,
+    canActivate: [LoginGuard],
+    loadChildren: './pages/pages.module#PagesModule' // Lazy load.
+  },
   /*----------------------------------------------------------------------------------*/
   /*  Ruta por defecto.
   /*----------------------------------------------------------------------------------*/

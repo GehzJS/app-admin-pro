@@ -11,6 +11,7 @@ import { BreadcrumsComponent } from './breadcrums/breadcrums.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NoPageComponent } from './no-page/no-page.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { UploadComponent } from 'src/app/components/upload/upload.component';
 /*====================================================================================*/
 /*  IMPORTACIONES DE PIPES
 /*====================================================================================*/
@@ -26,7 +27,8 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
     BreadcrumsComponent,
     NavbarComponent,
     NoPageComponent,
-    SidebarComponent
+    SidebarComponent,
+    UploadComponent
   ],
   /*----------------------------------------------------------------------------------*/
   /* Importaciones (modulos).
@@ -39,7 +41,8 @@ import { PipesModule } from 'src/app/pipes/pipes.module';
     BreadcrumsComponent,
     NavbarComponent,
     NoPageComponent,
-    SidebarComponent
+    SidebarComponent,
+    UploadComponent
   ]
 })
 export class SharedModule {}
