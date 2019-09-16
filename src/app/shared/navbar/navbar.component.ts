@@ -4,6 +4,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user/user.service';
 import { UserModel } from 'src/app/models/user.model';
+import { Router } from '@angular/router';
 /*====================================================================================*/
 /*  CONFIGURACIONES DEL COMPONENTE
 /*====================================================================================*/
@@ -26,7 +27,7 @@ export class NavbarComponent implements OnInit {
   /*==================================================================================*/
   /*  CONSTRUCTOR
   /*==================================================================================*/
-  constructor(public userService: UserService) {
+  constructor(private router: Router, private userService: UserService) {
     this.user = this.userService.user;
     this.userService.userChanges.subscribe((response: UserModel) => {
       this.user = response;
@@ -36,4 +37,8 @@ export class NavbarComponent implements OnInit {
   /*  FUNCIÓN DE INICIO
   /*==================================================================================*/
   ngOnInit() {}
+
+  search(keyword: string) {
+    this.router.navigate(['/search', keyword]);
+  }
 }

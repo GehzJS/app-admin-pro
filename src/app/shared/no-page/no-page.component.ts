@@ -2,6 +2,11 @@
 /*  IMPORTACIONES DE ANGULAR
 /*====================================================================================*/
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+/*====================================================================================*/
+/*  IMPORTACIONES DE LIBERÍAS DE TERCEROS
+/*====================================================================================*/
+import Swal from 'sweetalert2';
 /*====================================================================================*/
 /*  COMPATIBILIDAD CON PLUGINS DE JAVASCRIPT
 /*====================================================================================*/
@@ -12,7 +17,7 @@ declare function init_plugins();
 @Component({
   selector: 'app-no-page',
   templateUrl: './no-page.component.html',
-  styles: []
+  styleUrls: ['./no-page.component.css']
 })
 /*====================================================================================*/
 /*  INICIO DEL COMPONENTE
@@ -21,10 +26,20 @@ export class NoPageComponent implements OnInit {
   /*==================================================================================*/
   /*  DEFINICIÓN DE ATRIBUTOS
   /*==================================================================================*/
+  anho = new Date().getFullYear();
   /*==================================================================================*/
   /*  CONSTRUCTOR
   /*==================================================================================*/
-  constructor() {}
+  constructor(private router: Router) {
+    Swal.fire({
+      title: '¡Página no encontrada!',
+      text: 'La página a la que ha intentado acceder no existe.',
+      type: 'warning',
+      onClose: () => {
+        this.router.navigateByUrl('/dashboard');
+      }
+    });
+  }
   /*==================================================================================*/
   /*  FUNCIÓN DE INICIO
   /*==================================================================================*/

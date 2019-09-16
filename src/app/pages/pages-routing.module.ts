@@ -20,6 +20,11 @@ import { SettingsComponent } from 'src/app/components/settings/settings.componen
 import { HospitalsComponent } from './hospitals/hospitals.component';
 import { DoctorsComponent } from './doctors/doctors.component';
 import { DoctorComponent } from './doctors/doctor.component';
+import { SearchComponent } from './search/search.component';
+/*====================================================================================*/
+/*  IMPORTACIONES DE GUARDS
+/*====================================================================================*/
+import { AdminGuard } from 'src/app/guards/admin.guard';
 /*====================================================================================*/
 /*  DEFINICIÓN DE RUTAS
 /*====================================================================================*/
@@ -70,11 +75,20 @@ const pagesRoutes: Routes = [
         data: { title: 'Perfil' }
       },
       /*------------------------------------------------------------------------------*/
+      /*  Ruta del perfil de usuario.
+      /*------------------------------------------------------------------------------*/
+      {
+        path: 'search/:keyword',
+        component: SearchComponent,
+        data: { title: 'Buscador' }
+      },
+      /*------------------------------------------------------------------------------*/
       /*  Ruta de los usuarios.
       /*------------------------------------------------------------------------------*/
       {
         path: 'users',
         component: UsersComponent,
+        canActivate: [AdminGuard],
         data: { title: 'Usuarios' }
       },
       /*------------------------------------------------------------------------------*/

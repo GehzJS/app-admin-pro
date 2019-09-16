@@ -1,0 +1,89 @@
+<div class="row">
+  <div class="col-4">
+    <div class="card">
+      <div *ngIf="users" class="card-body">
+        <h4 class="card-title">
+          Usuarios
+          <small class="float-right">{{ users.length }} resultados</small>
+        </h4>
+        <table class="table table-hover">
+          <tbody>
+            <tr
+              *ngFor="let user of users"
+              routerLink="/users"
+              style="cursor: pointer"
+            >
+              <td style="width: 70px">
+                <img
+                  [src]="user.image | image:'users'"
+                  class="img-thumbnail"
+                  alt="user"
+                  style="max-width:100%"
+                />
+              </td>
+              <td>{{ user.name }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="card">
+      <div *ngIf="hospitals" class="card-body">
+        <h4 class="card-title">
+          Hospitales
+          <small class="float-right">{{ hospitals.length }} resultados</small>
+        </h4>
+        <table class="table table-hover">
+          <tbody>
+            <tr
+              *ngFor="let hospital of hospitals"
+              routerLink="/hospitals"
+              style="cursor: pointer"
+            >
+              <td style="width: 70px">
+                <img
+                  [src]="hospital.image | image:'hospitals'"
+                  class="img-thumbnail"
+                  alt="hospital"
+                  style="max-width:100%"
+                />
+              </td>
+              <td>{{ hospital.name }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="card">
+      <div *ngIf="doctors" class="card-body">
+        <h4 class="card-title">
+          Doctores
+          <small class="float-right">{{ doctors.length }} resultados</small>
+        </h4>
+        <table class="table table-hover">
+          <tbody>
+            <tr
+              *ngFor="let doctor of doctors"
+              [routerLink]="['/doctor', doctor._id]"
+              style="cursor: pointer"
+            >
+              <td style="width: 70px">
+                <img
+                  [src]="doctor.image | image:'doctors'"
+                  class="img-thumbnail"
+                  alt="doctor"
+                  style="max-width:100%"
+                />
+              </td>
+              <td>{{ doctor.name }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

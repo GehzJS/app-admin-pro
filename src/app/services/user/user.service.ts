@@ -41,6 +41,7 @@ export class UserService {
   /*  Variable de usuario.
   /*----------------------------------------------------------------------------------*/
   user: UserModel;
+  menu: any[];
   /*----------------------------------------------------------------------------------*/
   /*  Evento para actualizar el usuario en otros componentes.
   /*----------------------------------------------------------------------------------*/
@@ -58,6 +59,7 @@ export class UserService {
       this.token = 'n0t4v4l1dt0k3n';
     }
     this.user = JSON.parse(localStorage.getItem('user'));
+    this.menu = JSON.parse(localStorage.getItem('menu'));
     this.userChanges = new EventEmitter();
   }
   /*==================================================================================*/
@@ -73,7 +75,12 @@ export class UserService {
     const URL = `${API_URL}/login/google`;
     return this.http.post(URL, null).pipe(
       map((response: any) => {
-        this.saveLocalStorage(response.user._id, response.token, response.user);
+        this.saveLocalStorage(
+          response.user._id,
+          response.token,
+          response.user,
+          response.menu
+        );
         return response;
       })
     );
@@ -85,7 +92,12 @@ export class UserService {
     const URL = `${API_URL}/login`;
     return this.http.post(URL, user).pipe(
       map((response: any) => {
-        this.saveLocalStorage(response.user._id, response.token, response.user);
+        this.saveLocalStorage(
+          response.user._id,
+          response.token,
+          response.user,
+          response.menu
+        );
         if (remember) {
           localStorage.setItem('email', response.user.email);
         } else {
@@ -101,9 +113,11 @@ export class UserService {
   logout() {
     this.user = null;
     this.token = '';
+    this.menu = null;
     localStorage.removeItem('id');
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('menu');
     this.router.navigateByUrl('/login');
   }
   /*==================================================================================*/
@@ -192,12 +206,14 @@ export class UserService {
   /*==================================================================================*/
   /*  FUNCIÓN PARA GUARDAR LOS DATOS DEL USUARIO DE FORMA LOCAL
   /*==================================================================================*/
-  saveLocalStorage(id: string, token: string, user: any) {
+  saveLocalStorage(id: string, token: string, user: any, menu?: any[]) {
     localStorage.setItem('id', id);
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('menu', JSON.stringify(menu));
     this.token = token;
     this.user = user;
+    menu ? (this.menu = menu) : (this.menu = this.menu);
     this.userChanges.emit(this.user);
   }
 }
